@@ -10,6 +10,7 @@ const SignupForm = ({ onSubmit }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
+  
   const API_URL = process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/api/send-email'
     : `${window.location.origin}/api/send-email`;
