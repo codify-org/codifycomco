@@ -55,11 +55,11 @@ const FeaturesSection = () => {
           <div className="text-center mb-20">
             <h2 className="text-4xl font-bold mb-4">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200">
-                AI-Powered Trading Tools
+                Advanced Options Analytics Platform
               </span>
             </h2>
             <p className="max-w-2xl mx-auto text-lg text-purple-100/80">
-              Everything you need to analyze, backtest, and perfect your options strategies with AI-driven insights
+              Master options trading with precision Greek analysis, bid-ask spread optimization, and AI-powered earnings volatility predictions
             </p>
           </div>
 
@@ -67,33 +67,33 @@ const FeaturesSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <FeatureCard
               icon={BacktestingIcon}
-              title="AI Backtesting"
-              description="Test your strategies with AI-powered analysis, using real market conditions, millisecond-accurate historical data, and true bid-ask spreads."
+              title="Greek-Focused Backtesting"
+              description="Analyze historical Vega-to-Delta ratios to identify optimal setups where volatility exposure can provide a protective cushion against directional risk."
             />
             <FeatureCard
               icon={CalendarIcon}
-              title="Smart Calendar"
-              description="AI-enhanced earnings calendar with volatility forecasts, historical moves analysis, and predictive insights for better timing."
+              title="Earnings Volatility Analysis"
+              description="Deep dive into historical earnings reactions with precise volatility surface analysis to identify high-probability setups for upcoming announcements."
             />
             <FeatureCard
               icon={MarketDataIcon}
-              title="Premium Data"
-              description="Access institutional-grade options data enhanced by AI, including real-time Greeks, implied volatility surfaces, and order flow analysis."
+              title="Bid-Ask Spread Intelligence"
+              description="Real-time analysis of liquidity patterns and spread dynamics to optimize entry/exit points and minimize transaction costs in your options trades."
             />
             <FeatureCard
               icon={ScannerIcon}
-              title="AI Strategy Scanner"
-              description="Discover high-probability setups with our advanced AI scanner that analyzes market conditions and historical patterns."
+              title="Greek Composition Scanner"
+              description="Automatically identify options strategies with favorable Greek ratios, focusing on setups where Vega exposure can help offset potential Delta losses."
             />
             <FeatureCard
               icon={AnalyticsIcon}
-              title="Risk Analytics"
-              description="AI-driven risk analysis with professional-grade metrics including Greeks exposure, IV percentile, and profit probability calculations."
+              title="Volatility Risk Analysis"
+              description="Advanced analytics for measuring and visualizing Vega exposure, IV term structure, and volatility surface dynamics to better prepare for earnings events."
             />
             <FeatureCard
               icon={PositionIcon}
-              title="Smart Sizing"
-              description="Optimize your position sizes with AI-powered risk management tools based on your account size and risk tolerance."
+              title="Dynamic Position Sizing"
+              description="Smart position sizing recommendations based on Greek exposures, ensuring optimal risk management for your volatility-focused strategies."
             />
           </div>
 
