@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import Modal from './Modal';
 import SignupForm from './SignupForm';
 
+/**
+ * HeroSection component - Main landing section of the website
+ * Displays the primary call-to-action, signup modal and demo features
+ */
 const HeroSection = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showDemoModal, setShowDemoModal] = useState(false);
