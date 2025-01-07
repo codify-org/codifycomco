@@ -1,0 +1,6 @@
+{
+  "name": "api",
+  "dependencies": {
+    "resend": "^2.0.0"
+  }
+} 
