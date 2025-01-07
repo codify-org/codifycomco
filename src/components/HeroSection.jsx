@@ -85,8 +85,8 @@ const HeroSection = () => {
                 <div className="text-purple-300 text-sm">Historical Data</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-white">99.9%</div>
-                <div className="text-purple-300 text-sm">Data Accuracy</div>
+                <div className="text-3xl font-bold text-white">99.99%</div>
+                <div className="text-purple-300 text-sm">Uptime</div>
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">REST</div>
