@@ -10,18 +10,14 @@ const SignupForm = ({ onSubmit }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const API_URL = process.env.NODE_ENV === 'development'
-    ? 'http://localhost:3000/api/send-email'
-    : `${window.location.origin}/api/send-email`;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    console.log('Sending request to:', API_URL);
+    console.log('Sending request to:', '/api/send-email');
     console.log('Request data:', formData);
 
-    const response = await fetch(API_URL, {
+    const response = await fetch('/api/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
