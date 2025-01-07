@@ -38,15 +38,15 @@ const HeroSection = () => {
                 Codify AI Backtesting
               </span>
               <span className="block text-3xl md:text-4xl mt-3 text-purple-200 font-light">
-                Simulate options strategies considering bid ask spread liquidity risk
+                Backtest options strategies considering liquidity risk and greek exposures
               </span>
             </h1>
 
             {/* Description with better messaging for pro traders */}
             <p className="max-w-2xl mx-auto text-xl text-purple-100 leading-relaxed flex flex-col gap-2">
               <span>
-                Make informed trading decisions with institutional-grade backtesting powered by
-                <span className="font-semibold text-pink-300"> real bid-ask spread data</span>.
+                Find optimal setups to trigger daily stock option strategies
+                <span className="font-semibold text-pink-300"> with to the minute bid-ask granularity</span>.
               </span>
               <span>
                 Leverage
@@ -85,6 +85,7 @@ const HeroSection = () => {
                 <div className="text-purple-300 text-sm">Historical Data</div>
               </div>
               <div>
+
                 <div className="text-3xl font-bold text-white">99.99%</div>
                 <div className="text-purple-300 text-sm">Uptime</div>
               </div>
