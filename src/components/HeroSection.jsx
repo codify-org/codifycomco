@@ -50,12 +50,12 @@ const HeroSection = () => {
             <p className="max-w-2xl mx-auto text-xl text-purple-100 leading-relaxed flex flex-col gap-2">
               <span>
                 Find optimal setups to trigger daily stock option strategies
-                <span className="font-semibold text-pink-300"> with to the minute bid-ask granularity</span>.
+                <span className="font-semibold text-pink-300"> with to the tick bid-ask granularity</span>.
               </span>
               <span>
                 Leverage
                 <span className="font-semibold text-purple-300"> Deeper precision </span>
-                to optimize your strategies.
+                to optimize your day to day trading strategies.
               </span>
             </p>
 
@@ -95,7 +95,7 @@ const HeroSection = () => {
               </div>
               <div>
                 <div className="text-3xl font-bold text-white">REST</div>
-                <div className="text-purple-300 text-sm">API Ready</div>
+                <div className="text-purple-300 text-sm">API Access</div>
               </div>
             </div>
           </div>
@@ -110,7 +110,7 @@ const HeroSection = () => {
       >
         <div className="space-y-4">
           <p className="text-purple-100">
-            Join our exclusive early access program and be among the first to experience AI-powered options backtesting.
+            Join our exclusive early access program to be among rhe first ones to run your ideas on state of the art options backtesting.
           </p>
           <SignupForm onSubmit={handleSignupSubmit} />
         </div>
@@ -124,7 +124,7 @@ const HeroSection = () => {
       >
         <div className="space-y-6">
           <div className="bg-purple-900/20 rounded-lg p-6 border border-purple-900/50">
-            <h4 className="text-xl font-semibold text-purple-200 mb-2">Sample Strategy: Earnings Volatility</h4>
+            <h4 className="text-xl font-semibold text-purple-200 mb-2">Sample Strategy: Earnings Volatility Crush</h4>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-purple-100">Win Rate</span>
@@ -145,7 +145,7 @@ const HeroSection = () => {
             </div>
           </div>
           <p className="text-purple-100">
-            These results are based on historical data from Jan 2023 to Dec 2023, using our AI-powered backtesting engine.
+            These results are based on historical data from Jan 2021 to Dec 2024, using our backtesting engine.
           </p>
           <button
             onClick={() => {
