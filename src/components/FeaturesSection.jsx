@@ -46,7 +46,7 @@ const FeaturesSection = () => {
 
   return (
     <>
-      <div className="relative overflow-hidden bg-black bg-opacity-90 py-24">
+      <div id="features" className="relative overflow-hidden bg-black bg-opacity-90 py-24">
         {/* Subtle gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black"></div>
         

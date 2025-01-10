@@ -14,12 +14,16 @@ const LinkedInIcon = () => (
 
 const Footer = () => {
   return (
-
-    <footer className="bg-black bg-opacity-90 text-purple-100/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="relative bg-black">
+      {/* Enhanced background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-black to-black"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] opacity-20"></div>
+      
+      {/* Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="col-span-2">
+          <div className="col-span-2 backdrop-blur-sm p-6 rounded-xl bg-purple-900/5 border border-purple-900/10">
             <h3 className="text-lg font-semibold text-purple-100 mb-4">Codify AI LLC</h3>
             <address className="not-italic">
               1021 E Lincolnway, Suite #6656<br />
@@ -29,23 +33,50 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="backdrop-blur-sm p-6 rounded-xl bg-purple-900/5 border border-purple-900/10">
             <h3 className="text-lg font-semibold text-purple-100 mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#features" className="hover:text-purple-100 transition-colors">Features</a>
+                <a 
+                  href="#features" 
+                  className="hover:text-purple-100 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Features
+                </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-purple-100 transition-colors">About Us</a>
+                <a 
+                  href="#about" 
+                  className="hover:text-purple-100 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  About Us
+                </a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-purple-100 transition-colors">Contact</a>
+                <a 
+                  href="#contact" 
+                  className="hover:text-purple-100 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Contact
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Social Links */}
-          <div>
+          <div className="backdrop-blur-sm p-6 rounded-xl bg-purple-900/5 border border-purple-900/10">
             <h3 className="text-lg font-semibold text-purple-100 mb-4">Connect</h3>
             <ul className="space-y-4">
               <li>
@@ -74,9 +105,13 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-12 pt-8 border-t border-purple-900/50 text-center text-purple-300/70">
-          <p> {new Date().getFullYear()}  - CODIFY AI LLC - USA</p>
+        {/* Memorable Phrase with enhanced styling */}
+        <div className="mt-16 pt-12 pb-8 border-t border-purple-900/50 text-center relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-900/10 to-transparent"></div>
+          <p className="relative font-['Great_Vibes'] text-2xl md:text-3xl text-white/90 leading-relaxed px-4 py-2">
+            "In Every Market Moment Lies an Opportunity."
+          </p>
+          <p className="relative font-['Great_Vibes'] text-lg text-purple-300/80 mt-2">- The Codify Ai team</p>
         </div>
       </div>
     </footer>
