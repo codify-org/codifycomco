@@ -82,9 +82,15 @@ const ContactSection = () => {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-purple-200 mb-2">Message Sent!</h3>
-                <p className="text-purple-100">
+                <p className="text-purple-100 mb-6">
                   We'll get back to you as soon as possible.
                 </p>
+                <button
+                  onClick={handleReset}
+                  className="px-6 py-2 text-sm text-purple-200 hover:text-white transition-colors duration-300"
+                >
+                  Send another message
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
