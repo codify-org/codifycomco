@@ -12,9 +12,15 @@ const HeroSection = () => {
   const [showDemoModal, setShowDemoModal] = useState(false);
   const [showAIModal, setShowAIModal] = useState(false);
   const [showGreeksModal, setShowGreeksModal] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   // Initialize scroll reveal
   useScrollReveal();
+
+  useEffect(() => {
+    // Remove delay, set visible immediately
+    setIsVisible(true);
+  }, []);
 
   const handleSignupSubmit = (formData) => {
     console.log('Signup data:', formData);
@@ -23,102 +29,141 @@ const HeroSection = () => {
 
   return (
     <>
-      <div className="relative min-h-screen flex items-center justify-center py-24 px-4 sm:px-6 overflow-hidden section-transition">
-        {/* Animated background effects */}
-        <div className="absolute inset-0 bg-black">
-          {/* Gradient orb effect */}
-          <div className="absolute inset-0">
+      <div className="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 overflow-hidden section-transition">
+        {/* Background layers with lower z-indices */}
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ zIndex: 0, playbackRate: 0.5 }}
+            onLoadedMetadata={(e) => {
+              e.target.playbackRate = 1;
+            }}
+          >
+            <source src="/videos/hero-bg.mp4" type="video/mp4" />
+          </video>
+
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" style={{ zIndex: 1 }}></div>
+          
+          <div className="absolute inset-0" style={{ zIndex: 2 }}>
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-float-slow"></div>
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-float-slow-reverse"></div>
           </div>
           
-          {/* Subtle grid effect */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4a044e10_1px,transparent_1px),linear-gradient(to_bottom,#4a044e10_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4a044e10_1px,transparent_1px),linear-gradient(to_bottom,#4a044e10_1px,transparent_1px)] bg-[size:14px_24px]" style={{ zIndex: 3 }}></div>
 
-          {/* Noise texture overlay */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] opacity-20"></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] opacity-20" style={{ zIndex: 4 }}></div>
         </div>
 
-        {/* Content */}
-        <div className="relative max-w-7xl mx-auto section-transition-content">
+        {/* Main content with higher z-index */}
+        <div className="relative max-w-7xl mx-auto section-transition-content" style={{ zIndex: 10 }}>
           <div className="space-y-12 text-center">
             {/* Status badge */}
-            <div className="inline-block animate-fade-in-up">
-              <button 
-                onClick={() => setShowAIModal(true)}
-                className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-purple-100 bg-opacity-10 text-purple-200 backdrop-blur-sm hover-lift cursor-pointer"
-              >
-                <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
-                AI Powered Backtesting
-              </button>
-            </div>
+            <button 
+              onClick={() => setShowAIModal(true)}
+              className="relative inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100/20 text-purple-100 backdrop-blur-sm hover:bg-purple-100/30 transition-all duration-300 cursor-pointer group"
+              style={{ zIndex: 20 }}
+            >
+              <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
+              AI Powered Backtesting
+              <span className="absolute -right-1 -top-1 w-2 h-2 bg-pink-400 rounded-full animate-ping"></span>
+            </button>
 
             {/* Main heading with gradient text */}
-            <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight animate-fade-in-up delay-100">
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-pink-200">
-                Codify AI Backtesting
-              </span>
-              <span className="block text-3xl md:text-4xl mt-3 text-purple-200/90 font-light animate-fade-in delay-200">
-                Backtest options strategies considering <br/>
-                <button 
-                  onClick={() => setShowGreeksModal(true)}
-                  className="text-pink-300 hover:text-pink-400 transition-colors duration-300 underline decoration-dotted underline-offset-4"
+            <div className="space-y-4">
+              <h1 className="space-y-6 relative" style={{ zIndex: 20 }}>
+                <span 
+                  className={`block text-6xl md:text-7xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-100 to-pink-100 transition-all duration-1000 ease-out transform ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
                 >
-                  liquidity risk and greeks exposures
-                </button>
-              </span>
-            </h1>
+                  Codify AI Backtesting
+                </span>
+                <span 
+                  className={`block text-3xl md:text-4xl text-purple-100 font-light transition-all duration-1000 delay-300 ease-out transform ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                  }`}
+                >
+                  Backtest options strategies considering <br/>
+                  <button 
+                    onClick={() => setShowGreeksModal(true)}
+                    className="relative group text-pink-200 hover:text-pink-100 transition-colors duration-300 underline decoration-dotted underline-offset-4"
+                    style={{ zIndex: 20 }}
+                  >
+                    <span className="text-purple-300">liquidity</span> risk and <span className="text-pink-300">greeks</span> exposures
+                  </button>
+                </span>
+              </h1>
 
-            {/* Description */}
-            <p className="max-w-2xl mx-auto text-xl text-purple-100 leading-relaxed flex flex-col gap-2 animate-fade-in-up delay-300">
-              <span>
-                Find optimal setups to trigger daily stock option strategies
-                <span className="font-semibold text-pink-300"> with to the tick bid-ask granularity</span>.
-              </span>
-              <span>
-                Leverage
-                <span className="font-semibold text-purple-300"> Deeper precision </span>
-                to optimize your day to day trading strategies.
-              </span>
-            </p>
+              {/* Description */}
+              <p className={`relative max-w-2xl mx-auto text-xl text-purple-50 leading-relaxed transition-all duration-1000 delay-500 ease-out transform ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}>
+                {/* Blurred backdrop with softer border and shadow */}
+                <span className="absolute inset-0 bg-white/5 backdrop-blur-md rounded-2xl -z-10 
+                  border border-white/5 shadow-[0_0_200px_rgba(255,255,255,0.07)]"></span>
+                {/* Adding padding and making the container relative */}
+                <span className="relative block p-10">
+                  Find optimal setups to trigger daily stock option strategies
+                  <span className="font-semibold text-pink-200"> with to the second bid-ask granularity</span>.
+                  Leverage
+                  <span className="font-semibold text-purple-200"> Deeper precision </span>
+                  to optimize your day to day trading strategies.
+                </span>
+              </p>
+            </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-8 animate-fade-in-up delay-400">
+            <div className={`relative flex flex-row justify-center items-center gap-6 mt-8 transition-all duration-1000 delay-700 ease-out transform ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`} style={{ zIndex: 20 }}>
               <button 
                 onClick={() => setShowSignupModal(true)}
-                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg transform transition duration-300 ease-in-out shadow-lg hover:shadow-purple-500/50 hover-lift hover-glow"
+                className="relative px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg transition-all duration-300 ease-in-out shadow-lg hover:shadow-purple-500/50 hover:scale-[1.02] group"
               >
                 Start Backtesting Now
+                <span className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
               <button 
                 onClick={() => setShowDemoModal(true)}
-                className="w-full sm:w-auto group px-8 py-4 bg-white bg-opacity-10 backdrop-blur-sm text-white font-medium rounded-lg flex items-center justify-center gap-2 hover:bg-opacity-20 transition duration-300 hover-lift"
+                className="group relative px-8 py-4 bg-white/15 backdrop-blur-sm text-white font-medium rounded-lg flex items-center justify-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10"
               >
                 <span>See Live Results</span>
-                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
+                <span className="absolute -right-1 -top-1 w-2 h-2 bg-purple-400 rounded-full animate-ping opacity-0 group-hover:opacity-100"></span>
               </button>
             </div>
 
-            {/* Stats section with parallax */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 mt-16 border-t border-purple-800/30 animate-fade-in-up delay-500 parallax-scroll">
-              <div className="reveal-on-scroll px-4">
-                <div className="text-3xl font-bold text-white">1000ms</div>
-                <div className="text-purple-300/80 text-sm mt-2">Tick Precision</div>
+            {/* Stats section - Moving it up and enhancing visibility */}
+            <div className={`grid grid-cols-2 md:grid-cols-4 gap-8 pt-8 mt-8 border-t border-purple-400/30 transition-all duration-300 ${
+              isVisible ? 'opacity-100' : 'opacity-0'
+            }`}>
+              <div className="px-4">
+                <div className="text-4xl font-bold text-white animate-fade-in">1000ms</div>
+                <div className="text-purple-100 text-sm mt-2 font-medium">Tick Precision</div>
               </div>
-              <div className="reveal-on-scroll delay-100 px-4">
-                <div className="text-3xl font-bold text-white">4+ Years</div>
-                <div className="text-purple-300/80 text-sm mt-2">Historical Data</div>
+              <div className="px-4">
+                <div className="text-4xl font-bold text-white animate-fade-in">4+ Years</div>
+                <div className="text-purple-100 text-sm mt-2 font-medium">Historical Data</div>
               </div>
-              <div className="reveal-on-scroll delay-200 px-4">
-                <div className="text-3xl font-bold text-white">99.99%</div>
-                <div className="text-purple-300/80 text-sm mt-2">Uptime</div>
+              <div className="px-4">
+                <div className="text-4xl font-bold text-white animate-fade-in">99.99%</div>
+                <div className="text-purple-100 text-sm mt-2 font-medium">Uptime</div>
               </div>
-              <div className="reveal-on-scroll delay-300 px-4">
-                <div className="text-3xl font-bold text-white">REST</div>
-                <div className="text-purple-300/80 text-sm mt-2">API Access</div>
+              <div className="px-4">
+                <div className="text-4xl font-bold text-white animate-fade-in">REST</div>
+                <div className="text-purple-100 text-sm mt-2 font-medium">API Access</div>
               </div>
+            </div>
+
+            {/* Add helper text that fades in */}
+            <div className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-purple-200/70 text-sm opacity-0 transition-opacity duration-500 hover:opacity-100">
+              Click elements to learn more
             </div>
           </div>
         </div>

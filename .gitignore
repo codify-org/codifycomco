@@ -9,7 +9,7 @@ node_modules
 # Production
 /dist
 /build
-
+*ignoreme*
 # Misc
 .DS_Store
 .env
