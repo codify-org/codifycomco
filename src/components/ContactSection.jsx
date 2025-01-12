@@ -10,16 +10,30 @@ const ContactSection = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const handleReset = () => {
+    setFormData({
+      name: '',
+      email: '',
+      message: ''
+    });
+    setSuccess(false);
+    setError('');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
 
-    // Here you would typically send the data to your backend
-    // For now, we'll simulate a successful submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate network delay for better UX
+    await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // Simulate successful submission
     setSuccess(true);
     setIsLoading(false);
+    
+    // Log the form data (for demonstration)
+    console.log('Form submitted:', formData);
   };
 
   return (

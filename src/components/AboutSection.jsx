@@ -113,6 +113,14 @@ const AboutSection = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <div className="text-center mb-24">
+          {/* Logo */}
+          <div className="mb-12">
+            <img 
+              src="/logo-transparent.png" 
+              alt="Codify AI Logo" 
+              className="w-32 h-32 mx-auto opacity-90 hover:opacity-100 transform hover:scale-105 transition-all duration-300"
+            />
+          </div>
           <h2 className="text-5xl font-bold mb-6 relative inline-block">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-200 to-purple-300 animate-gradient">
               About Us

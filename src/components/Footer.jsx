@@ -108,10 +108,28 @@ const Footer = () => {
         {/* Memorable Phrase with enhanced styling */}
         <div className="mt-16 pt-12 pb-8 border-t border-purple-900/50 text-center relative">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-900/10 to-transparent"></div>
-          <p className="relative font-['Great_Vibes'] text-2xl md:text-02xl text-white/90 leading-relaxed px-4 py-2 mt-20">
+          <p className="relative font-['Great_Vibes'] text-2xl md:text-02xl text-white/90 leading-relaxed px-4 py-2">
             "In Every Market Moment Lies an Opportunity."
           </p>
-          <p className="relative font-['Great_Vibes'] text-lg text-purple-300/80 mt-5">- The Codify Ai team -</p>
+          <p className="relative font-['Great_Vibes'] text-lg text-purple-300/80 mt-5 mb-12">- The Codify Ai team -</p>
+          
+          {/* Logo at bottom */}
+          <div className="flex justify-center">
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="group"
+            >
+              <img 
+                src="/logo-transparent.png" 
+                alt="Codify AI Logo" 
+                className="w-16 h-16 opacity-60 group-hover:opacity-100 transform group-hover:scale-105 transition-all duration-300"
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
