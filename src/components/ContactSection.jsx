@@ -37,12 +37,24 @@ const ContactSection = () => {
   };
 
   return (
-    <div id="contact" className="relative overflow-hidden bg-black bg-opacity-90 py-24">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black"></div>
-      
+    <section id="contact" className="relative py-16 bg-black">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900/10 via-black to-black"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] opacity-20"></div>
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
+        {/* Logo Section */}
+        <div className="flex justify-center mb-12">
+          <div className="w-24 h-24 relative">
+            <img
+              src="/logo-transparent.png"
+              alt="Codify Logo"
+              className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-full"></div>
+          </div>
+        </div>
+
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200">
@@ -179,7 +191,7 @@ const ContactSection = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

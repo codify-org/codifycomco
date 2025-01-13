@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
 import AboutSection from './components/AboutSection';
+import ArticlesSection from './components/ArticlesSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
 import './App.css';
@@ -32,6 +33,7 @@ const App = () => {
       {isPreview && <PreviewBanner />}
       <HeroSection />
       <FeaturesSection />
+      <ArticlesSection />
       <AboutSection />
       <ContactSection />
       <Footer />

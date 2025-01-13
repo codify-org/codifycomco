@@ -141,6 +141,7 @@ const FeatureCard = ({ icon: Icon, title, description, featureKey }) => {
 
 const FeaturesSection = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [selectedFeature, setSelectedFeature] = useState(null);
 
   const handleSignupSubmit = (formData) => {
     console.log('Signup data:', formData);
@@ -148,76 +149,91 @@ const FeaturesSection = () => {
   };
 
   return (
-    <>
-      <div id="features" className="relative overflow-hidden bg-black bg-opacity-90 py-24">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-black to-black"></div>
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Section header */}
-          <div className="text-center mb-20">
-            <h2 className="text-4xl font-bold mb-4">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200">
-                Advanced Options Analytics Platform
-              </span>
-            </h2>
-            <p className="max-w-2xl mx-auto text-lg text-purple-100/80">
-              Master options trading with precision Greek analysis, bid-ask spread optimization, and AI-powered earnings volatility predictions
-            </p>
-          </div>
+    <div id="features" className="relative bg-black py-24">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/20 to-black">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/10 rounded-full filter blur-3xl"></div>
+        </div>
+      </div>
 
-          {/* Features grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard
-              icon={BacktestingIcon}
-              title="Greek-Focused Backtesting"
-              description="Analyze historical Vega-to-Delta ratios to identify optimal setups where volatility exposure can provide a protective cushion against directional risk."
-              featureKey="backtesting"
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Logo Section */}
+        <div className="flex justify-center mb-12">
+          <div className="w-24 h-24 relative">
+            <img
+              src="/logo-transparent.png"
+              alt="Codify Logo"
+              className="w-full h-full object-contain opacity-80 hover:opacity-100 transition-opacity"
             />
-            <FeatureCard
-              icon={CalendarIcon}
-              title="Earnings Volatility Analysis"
-              description="Deep dive into historical earnings reactions with precise volatility surface analysis to identify high-probability setups for upcoming announcements."
-              featureKey="earnings"
-            />
-            <FeatureCard
-              icon={MarketDataIcon}
-              title="Bid-Ask Spread Intelligence"
-              description="Real-time analysis of liquidity patterns and spread dynamics to optimize entry/exit points and minimize transaction costs in your options trades."
-              featureKey="bidask"
-            />
-            <FeatureCard
-              icon={ScannerIcon}
-              title="Greek Composition Scanner"
-              description="Automatically identify options strategies with favorable Greek ratios, focusing on setups where Vega exposure can help offset potential Delta losses."
-              featureKey="scanner"
-            />
-            <FeatureCard
-              icon={AnalyticsIcon}
-              title="Volatility Risk Analysis"
-              description="Advanced analytics for measuring and visualizing Vega exposure, IV term structure, and volatility surface dynamics to better prepare for earnings events."
-              featureKey="analytics"
-            />
-            <FeatureCard
-              icon={PositionIcon}
-              title="Dynamic Position Sizing"
-              description="Smart position sizing recommendations based on Greek exposures, ensuring optimal risk management for your volatility-focused strategies."
-              featureKey="position"
-            />
+            <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-full"></div>
           </div>
+        </div>
 
-          {/* Bottom CTA */}
-          <div className="text-center mt-20">
-            <button 
-              onClick={() => setShowSignupModal(true)}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg transform hover:scale-105 transition duration-300 ease-in-out shadow-lg hover:shadow-purple-500/50"
-            >
-              <span>Start Trading Smarter</span>
-              <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-          </div>
+        {/* Section header */}
+        <div className="text-center mb-24">
+          <h2 className="text-4xl font-bold mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200">
+              Advanced Options Analytics Platform
+            </span>
+          </h2>
+          <p className="max-w-2xl mx-auto text-lg text-purple-100/80">
+            Master options trading with precision Greek analysis, bid-ask spread optimization, and AI-powered earnings volatility predictions
+          </p>
+        </div>
+
+        {/* Features grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <FeatureCard
+            icon={BacktestingIcon}
+            title="Greek-Focused Backtesting"
+            description="Analyze historical Vega-to-Delta ratios to identify optimal setups where volatility exposure can provide a protective cushion against directional risk."
+            featureKey="backtesting"
+          />
+          <FeatureCard
+            icon={CalendarIcon}
+            title="Earnings Volatility Analysis"
+            description="Deep dive into historical earnings reactions with precise volatility surface analysis to identify high-probability setups for upcoming announcements."
+            featureKey="earnings"
+          />
+          <FeatureCard
+            icon={MarketDataIcon}
+            title="Bid-Ask Spread Intelligence"
+            description="Real-time analysis of liquidity patterns and spread dynamics to optimize entry/exit points and minimize transaction costs in your options trades."
+            featureKey="bidask"
+          />
+          <FeatureCard
+            icon={ScannerIcon}
+            title="Greek Composition Scanner"
+            description="Automatically identify options strategies with favorable Greek ratios, focusing on setups where Vega exposure can help offset potential Delta losses."
+            featureKey="scanner"
+          />
+          <FeatureCard
+            icon={AnalyticsIcon}
+            title="Volatility Risk Analysis"
+            description="Advanced analytics for measuring and visualizing Vega exposure, IV term structure, and volatility surface dynamics to better prepare for earnings events."
+            featureKey="analytics"
+          />
+          <FeatureCard
+            icon={PositionIcon}
+            title="Dynamic Position Sizing"
+            description="Smart position sizing recommendations based on Greek exposures, ensuring optimal risk management for your volatility-focused strategies."
+            featureKey="position"
+          />
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="text-center mt-20">
+          <button 
+            onClick={() => setShowSignupModal(true)}
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium rounded-lg transform hover:scale-105 transition duration-300 ease-in-out shadow-lg hover:shadow-purple-500/50"
+          >
+            <span>Start Trading Smarter</span>
+            <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -234,7 +250,7 @@ const FeaturesSection = () => {
           <SignupForm onSubmit={handleSignupSubmit} />
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 
