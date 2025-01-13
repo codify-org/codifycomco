@@ -81,13 +81,13 @@ const Footer = () => {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="https://x.com/CodifyBacktesting" 
+                  href="https://x.com/AiBacktesting" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-purple-100 transition-colors group"
                 >
                   <CodifyBacktestingIcon />
-                  <span>CodifyBacktesting</span>
+                  <span>AiBacktesting</span>
                 </a>
               </li>
               <li>
