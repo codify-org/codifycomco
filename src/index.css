@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Precious';
+  src: url('/fonts/Precious.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Evas Signatures';
+  src: url('/fonts/Evas Signatures.ttf') format('truetype'),
+       url('/fonts/Evas Signatures.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom letter spacing for signatures */
+.signature-spacing {
+  letter-spacing: 0.15em;
+}
+
 @layer base {
   html {
     @apply h-full scroll-smooth;
