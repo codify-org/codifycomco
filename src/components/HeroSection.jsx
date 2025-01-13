@@ -72,6 +72,18 @@ const HeroSection = () => {
               <span className="absolute -right-1 -top-1 w-2 h-2 bg-pink-400 rounded-full animate-ping"></span>
             </button>
 
+            {/* Mobile Logo - only visible on small screens */}
+            <div className="relative w-20 h-20 mx-auto mt-6 mb-2 md:hidden">
+              <img
+                src="/logo-transparent.png"
+                alt="Codify AI Logo"
+                className={`w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(168,85,247,0.35)] transition-all duration-1000 ease-out transform hover:scale-110 ${
+                  isVisible ? 'opacity-90' : 'opacity-0'
+                }`}
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-full"></div>
+            </div>
+
             {/* Main heading with gradient text */}
             <div className="space-y-4">
               <h1 className="space-y-6 relative" style={{ zIndex: 20 }}>
@@ -107,11 +119,13 @@ const HeroSection = () => {
                   border border-white/5 shadow-[0_0_200px_rgba(255,255,255,0.07)]"></span>
                 {/* Adding padding and making the container relative */}
                 <span className="relative block p-10">
-                  Find optimal setups to trigger daily stock option strategies
+                  Find optimal setups to trigger daily stock option trades
                   <span className="font-semibold text-pink-200"> with to the second bid-ask granularity</span>.
                   Leverage
                   <span className="font-semibold text-purple-200"> Deeper precision </span>
-                  to optimize your day to day trading strategies.
+                  to enter and exit Multi-leg Options Strategies on
+                <span className="font-semibold text-pink-300">  economic and corporates </span>events 
+
                 </span>
               </p>
             </div>
@@ -127,11 +141,24 @@ const HeroSection = () => {
                 Start Backtesting Now
                 <span className="absolute inset-0 rounded-lg bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </button>
+
+              {/* Desktop Logo - only visible on medium screens and up */}
+              <div className="relative w-16 h-16 mx-4 hidden md:block">
+                <img
+                  src="/logo-transparent.png"
+                  alt="Codify AI Logo"
+                  className={`w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(168,85,247,0.35)] transition-all duration-1000 ease-out transform hover:scale-110 ${
+                    isVisible ? 'opacity-90' : 'opacity-0'
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent rounded-full"></div>
+              </div>
+
               <button 
                 onClick={() => setShowDemoModal(true)}
                 className="group relative px-8 py-4 bg-white/15 backdrop-blur-sm text-white font-medium rounded-lg flex items-center justify-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-white/10"
               >
-                <span>See Live Results</span>
+                <span>Live Trading Results</span>
                 <svg className="w-5 h-5 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

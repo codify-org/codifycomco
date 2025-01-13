@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Allow all bots to access all content
+Disallow:
+
+# Crawl-delay for all bots
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://codify.com.co/sitemap.xml
+
+# Additional rules for specific bots
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Host directive for preferred domain
+Host: codify.com.co 

@@ -22,14 +22,14 @@ const EssentialFunctionsArticle = {
 
       <section class="mb-8">
         <p class="lead text-lg text-purple-200">
-          While trading options around earnings announcements can be quite profitable, there are also great hazards involved. The <strong>bid-ask spread</strong> is a sometimes disregarded but important element in this high-stakes environment. Failing to correctly handle the bid-ask spread can turn a possibly winning trade into a losing one for traders making short-term trades—that is, initiating positions two days before an earnings release expecting a reaction to the news.
+          Options trading around earnings events offers unique profit opportunities, but comes with hidden pitfalls. The <strong>bid-ask spread</strong> - a technical yet critical component - often determines success or failure in these trades. For traders taking positions just days before earnings announcements, mastering spread dynamics isn't optional - it's essential for survival.
         </p>
       </section>
 
       <section class="mb-12">
         <h2 class="text-2xl font-bold text-purple-100 mb-4">Understanding the Bid-Ask Spread</h2>
         <p>
-          The <strong>bid-ask spread</strong> is the difference between the lowest price a seller is ready to accept (<span class="text-red-400">ask</span>) and the highest price a buyer is ready to pay for an option (<span class="text-blue-400">bid</span>). For traders, this spread represents a cost: purchasing at the ask and selling at the bid usually results in an instant, unrealized loss equal to the spread. While wide spreads indicate illiquidity and increased costs, narrow spreads usually signal good liquidity and reduced transaction costs.
+          The <strong>bid-ask spread</strong> represents the gap between what buyers will pay (<span class="text-red-400">bid</span>) and what sellers demand (<span class="text-blue-400">ask</span>). This spread isn't just a number - it's a tax on every trade you make. Each transaction starts underwater by the spread amount, requiring larger price moves just to break even. Tight spreads signal efficient markets, while wide spreads warn of potential execution problems.
         </p>
         <div class="my-8">
           <BidAskGraph />
@@ -42,14 +42,14 @@ const EssentialFunctionsArticle = {
           <div class="p-4 bg-purple-900/10 rounded-lg">
             <h3 class="text-lg font-semibold text-purple-200 mb-2">1. Liquidity Issues and Price Volatility</h3>
             <p>
-              Earnings announcements, especially those after market close, can generate increased volatility and uncertainty. This higher volatility may lead to wider bid-ask spreads due to increased risk for market makers. Ignoring wider spreads when entering a trade expecting an earnings reaction could result in mispriced expectations and execution slippage.
+              Post-market earnings releases create a pressure cooker environment where spreads can explode without warning. Market makers, facing heightened risk, protect themselves by widening spreads. Traders who ignore these widening spreads often find their edge evaporating before the trade even begins.
             </p>
           </div>
 
           <div class="p-4 bg-purple-900/10 rounded-lg">
             <h3 class="text-lg font-semibold text-purple-200 mb-2">2. Effect on Profitability</h3>
             <p>
-              A narrow bid-ask spread reduces the cost of moving from opening to closing a position, making short-term profit projections more realistic. Conversely, a wide spread can erode gains or even turn a potentially winning trade into a loss, especially in the volatile window around an earnings event.
+              Tight spreads are like a smooth road for your trades - allowing efficient entry and exit. Wide spreads act like toll booths, each one taking a bite from your returns. During earnings volatility, these tolls can multiply rapidly, turning theoretical winners into real-world losses.
             </p>
           </div>
 
