@@ -35,35 +35,44 @@ const ArticlePage = () => {
       return;
     }
 
-    // Find the article based on the URL slug
     const foundArticle = articles.find(a => a && a.slug === slug);
-
     console.log('Found article:', foundArticle);
 
     if (foundArticle) {
       setArticle(foundArticle);
-      // Update meta tags
+      
+      // Ensure all meta tags exist
+      const metaTags = {
+        'description': { name: 'description', content: foundArticle.content?.substring(0, 160) || '' },
+        'og:title': { property: 'og:title', content: foundArticle.title },
+        'og:description': { property: 'og:description', content: foundArticle.content?.substring(0, 160) || '' },
+        'og:url': { property: 'og:url', content: window.location.href },
+        'og:type': { property: 'og:type', content: 'article' },
+        'og:site_name': { property: 'og:site_name', content: 'Codify AI Backtesting' },
+        'og:image': { property: 'og:image', content: 'https://codify.com.co/logo-1k.png' },
+        'twitter:title': { name: 'twitter:title', content: foundArticle.title },
+        'twitter:description': { name: 'twitter:description', content: foundArticle.content?.substring(0, 160) || '' }
+      };
+
+      // Update or create meta tags
+      Object.entries(metaTags).forEach(([key, attributes]) => {
+        let tag = document.querySelector(`meta[${attributes.name ? 'name' : 'property'}="${key}"]`);
+        if (!tag) {
+          tag = document.createElement('meta');
+          tag.setAttribute(attributes.name ? 'name' : 'property', key);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', attributes.content);
+      });
+
+      // Update title
       document.title = `${foundArticle.title} | Codify AI Backtesting`;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
-      
-      // Update Open Graph meta tags (LinkedIn uses these)
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', foundArticle.title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
-      document.querySelector('meta[property="og:url"]')?.setAttribute('content', window.location.href);
-      document.querySelector('meta[property="og:type"]')?.setAttribute('content', 'article');
-      document.querySelector('meta[property="og:site_name"]')?.setAttribute('content', 'Codify AI Backtesting');
-      document.querySelector('meta[property="og:image"]')?.setAttribute('content', 'https://codify.com.co/logo-1k.png') ||
-        createMetaTag('property', 'og:image', 'https://codify.com.co/logo-1k.png');
-      
-      // Remove old LinkedIn specific meta tags as they're not needed
+
+      // Remove old LinkedIn specific meta tags
       const linkedinTags = document.querySelectorAll('meta[property^="linkedin:"]');
       linkedinTags.forEach(tag => tag.remove());
-      
-      // Update Twitter meta tags
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', foundArticle.title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
 
-      // Add article schema
+      // Update article schema
       const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
@@ -83,7 +92,7 @@ const ArticlePage = () => {
         },
         'mainEntityOfPage': {
           '@type': 'WebPage',
-          '@id': `https://codify.com.co/article/${foundArticle.slug}`
+          '@id': window.location.href
         },
         'datePublished': foundArticle.publishDate || new Date().toISOString(),
         'dateModified': foundArticle.lastModified || new Date().toISOString()
@@ -105,12 +114,25 @@ const ArticlePage = () => {
 
     // Cleanup
     return () => {
+      const defaultDescription = 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.';
+      
       document.title = 'Codify AI Backtesting';
-      document.querySelector('meta[name="description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', 'Codify AI Backtesting');
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', 'Codify AI Backtesting');
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
+      
+      // Reset meta tags to defaults
+      const defaultMetaTags = {
+        'description': { name: 'description', content: defaultDescription },
+        'og:title': { property: 'og:title', content: 'Codify AI Backtesting' },
+        'og:description': { property: 'og:description', content: defaultDescription },
+        'twitter:title': { name: 'twitter:title', content: 'Codify AI Backtesting' },
+        'twitter:description': { name: 'twitter:description', content: defaultDescription }
+      };
+
+      Object.entries(defaultMetaTags).forEach(([key, attributes]) => {
+        const tag = document.querySelector(`meta[${attributes.name ? 'name' : 'property'}="${key}"]`);
+        if (tag) {
+          tag.setAttribute('content', attributes.content);
+        }
+      });
       
       const scriptTag = document.querySelector('#article-schema');
       if (scriptTag) scriptTag.remove();
