@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   
-  <!-- Preload critical assets -->
-  <link rel="modulepreload" href="/src/main.jsx" as="script" type="module">
-  <link rel="prefetch" href="/videos/hero-bg.mp4">
-  <link rel="preload" href="/logo-transparent.png" as="image" type="image/png">
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" as="style">
+  <!-- Critical resources first -->
+  <link rel="modulepreload" href="/src/main.jsx" crossorigin="anonymous">
+  <link rel="preload" href="/logo-transparent.png" as="image" type="image/png" fetchpriority="high">
+  <link rel="preload" href="/videos/hero-bg.mp4" as="video" type="video/mp4" fetchpriority="low">
+  
+  <!-- Fonts preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+  </noscript>
   
   <!-- Performance optimizations -->
   <meta http-equiv="Cache-Control" content="max-age=31536000" />
@@ -45,11 +52,6 @@
   <meta name="twitter:title" content="Codify AI Backtesting">
   <meta name="twitter:description" content="Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.">
   <meta name="twitter:image" content="https://codify.com.co/logo-1k.png">
-  
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet">
   
   <!-- Title -->
   <title>Codify AI Backtesting</title>
