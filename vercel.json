@@ -1,26 +1,20 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    }
-  ],
   "routes": [
     {
-      "src": "/assets/(.*)",
+      // API endpoint for email signup - handled by serverless function
+      "src": "/api/send-email",
+      "methods": ["POST", "OPTIONS"],
       "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Content-Type": "application/json"
       },
-      "continue": true
+      "dest": "/api/send-email/index.js"
     },
     {
-      "handle": "filesystem"
-    },
-    {
+      // All other routes (including /article/:slug) are handled by the SPA
       "src": "/(.*)",
       "dest": "/index.html"
     }

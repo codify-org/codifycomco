@@ -18,40 +18,46 @@ const SignupForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError('');
 
     console.log('Sending request to:', API_URL);
     console.log('Request data:', formData);
 
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
-
-    const responseText = await response.text();
-    console.log('Raw response:', responseText);
-
-    let data;
     try {
-      data = JSON.parse(responseText);
-      console.log('Parsed response:', data);
-    } catch (e) {
-      console.error('Failed to parse response:', e);
-      setError('Server returned invalid response');
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+        console.log('Parsed response:', data);
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        setError('Server returned invalid response');
+        setIsLoading(false);
+        return;
+      }
+
+      if (response.ok) {
+        setSuccess(true);
+        onSubmit(formData);
+      } else {
+        setError(data.message || 'Failed to send email');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setError('Network error occurred. Please try again.');
+    } finally {
       setIsLoading(false);
-      return;
     }
-
-    if (response.ok) {
-      setSuccess(true);
-      onSubmit(formData);
-    } else {
-      setError(data.message || 'Failed to send email');
-    }
-
-    setIsLoading(false);
   };
 
   const handleInterestToggle = (interest) => {
