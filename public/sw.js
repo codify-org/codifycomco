@@ -45,6 +45,18 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Handle article pages
+  if (event.request.url.includes('/article/')) {
+    event.respondWith(
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.match('/index.html').then((response) => {
+          return response || fetch('/index.html');
+        });
+      })
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
