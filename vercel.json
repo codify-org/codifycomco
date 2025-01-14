@@ -2,7 +2,6 @@
   "version": 2,
   "routes": [
     {
-      // API endpoint for email signup - handled by serverless function
       "src": "/api/send-email",
       "methods": ["POST", "OPTIONS"],
       "headers": {
@@ -14,7 +13,6 @@
       "dest": "/api/send-email/index.js"
     },
     {
-      // All other routes (including /article/:slug) are handled by the SPA
       "src": "/(.*)",
       "dest": "/index.html"
     }
