@@ -14,36 +14,26 @@ import VegaGraph from './articles/greeks/VegaGraph';
 import RhoGraph from './articles/greeks/RhoGraph';
 
 const ArticleModal = ({ article, onClose }) => {
-  const shareUrl = `${window.location.origin}/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`;
+  const shareUrl = `${window.location.origin}/article/${article.slug}`;
   
-  const handleShare = async (platform) => {
-    const title = `${article.title} | Codify AI Backtesting`;
-    const text = article.description;
-    
+  const handleShare = (platform) => {
+    const title = article.title;
+    const text = article.content?.substring(0, 160) || '';
+
     switch (platform) {
       case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'width=600,height=600,toolbar=0,location=0,menubar=0');
         break;
       case 'linkedin':
-        const linkedinUrl = new URL('https://www.linkedin.com/sharing/share-offsite/');
-        linkedinUrl.searchParams.append('url', shareUrl);
-        linkedinUrl.searchParams.append('title', title);
-        linkedinUrl.searchParams.append('summary', text);
-        linkedinUrl.searchParams.append('source', 'Codify AI Backtesting');
-        window.open(
-          linkedinUrl.toString(),
-          'LinkedInShare',
-          'width=600,height=600,toolbar=0,location=0,menubar=0'
-        );
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank', 'width=600,height=600,toolbar=0,location=0,menubar=0');
         break;
       case 'copy':
-        try {
-          await navigator.clipboard.writeText(shareUrl);
-          // You might want to add a toast notification here
-          console.log('URL copied to clipboard');
-        } catch (err) {
-          console.error('Failed to copy URL:', err);
-        }
+        navigator.clipboard.writeText(shareUrl)
+          .then(() => {
+            setShowCopiedMessage(true);
+            setTimeout(() => setShowCopiedMessage(false), 2000);
+          })
+          .catch(err => console.error('Failed to copy URL:', err));
         break;
       default:
         break;

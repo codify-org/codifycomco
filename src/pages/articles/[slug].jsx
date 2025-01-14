@@ -30,9 +30,7 @@ const ArticlePage = () => {
     }
 
     // Find the article based on the URL slug
-    const foundArticle = articles.find(a => 
-      a && a.title && a.title.toLowerCase().replace(/\s+/g, '-') === slug
-    );
+    const foundArticle = articles.find(a => a && a.slug === slug);
 
     console.log('Found article:', foundArticle);
 
@@ -40,11 +38,11 @@ const ArticlePage = () => {
       setArticle(foundArticle);
       // Update meta tags
       document.title = `${foundArticle.title} | Codify AI Backtesting`;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', foundArticle.content.substring(0, 160));
+      document.querySelector('meta[name="description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
       
       // Update Open Graph meta tags
       document.querySelector('meta[property="og:title"]')?.setAttribute('content', foundArticle.title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', foundArticle.content.substring(0, 160));
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
       document.querySelector('meta[property="og:url"]')?.setAttribute('content', window.location.href);
       document.querySelector('meta[property="og:type"]')?.setAttribute('content', 'article');
       document.querySelector('meta[property="og:site_name"]')?.setAttribute('content', 'Codify AI Backtesting');
@@ -52,21 +50,21 @@ const ArticlePage = () => {
       // Update LinkedIn specific meta tags
       document.querySelector('meta[property="linkedin:title"]')?.setAttribute('content', foundArticle.title) ||
         createMetaTag('property', 'linkedin:title', foundArticle.title);
-      document.querySelector('meta[property="linkedin:description"]')?.setAttribute('content', foundArticle.content.substring(0, 160)) ||
-        createMetaTag('property', 'linkedin:description', foundArticle.content.substring(0, 160));
+      document.querySelector('meta[property="linkedin:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '') ||
+        createMetaTag('property', 'linkedin:description', foundArticle.content?.substring(0, 160) || '');
       document.querySelector('meta[property="linkedin:image"]')?.setAttribute('content', 'https://codify.com.co/logo-1k.png') ||
         createMetaTag('property', 'linkedin:image', 'https://codify.com.co/logo-1k.png');
       
       // Update Twitter meta tags
       document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', foundArticle.title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', foundArticle.content.substring(0, 160));
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
 
       // Add article schema
       const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
         'headline': foundArticle.title,
-        'description': foundArticle.content.substring(0, 160),
+        'description': foundArticle.content?.substring(0, 160) || '',
         'author': {
           '@type': 'Organization',
           'name': 'Codify AI Backtesting'
@@ -81,7 +79,7 @@ const ArticlePage = () => {
         },
         'mainEntityOfPage': {
           '@type': 'WebPage',
-          '@id': `https://codify.com.co/article/${slug}`
+          '@id': `https://codify.com.co/article/${foundArticle.slug}`
         },
         'datePublished': foundArticle.publishDate || new Date().toISOString(),
         'dateModified': foundArticle.lastModified || new Date().toISOString()
