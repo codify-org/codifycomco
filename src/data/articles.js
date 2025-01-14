@@ -1,26 +1,32 @@
-import SpreadMetricsArticle from '../components/articles/bid-ask/SpreadMetricsArticle.js';
-import EssentialFunctionsArticle from '../components/articles/essential-functions/EssentialFunctionsArticle.js';
-import GreeksArticle from '../components/articles/greeks/GreeksArticle.js';
-import VolatilityCrushArticle from '../components/articles/greeksonearnings/VolatilityCrushArticle.js';
+import SpreadMetricsArticle from '../components/articles/bid-ask/SpreadMetricsArticle.jsx';
+import EssentialFunctionsArticle from '../components/articles/essential-functions/EssentialFunctionsArticle.jsx';
+import GreeksArticle from '../components/articles/greeks/GreeksArticle.jsx';
+import VolatilityCrushArticle from '../components/articles/greeksonearnings/VolatilityCrushArticle.jsx';
+import { articles, articleTypes } from './articleMetadata.js';
 
-export const articleTypes = {
-  spreadMetrics: 'spread-metrics',
-  essentialFunctions: 'essential-functions',
-  greeks: 'greeks',
-  volatilityCrush: 'volatility-crush'
-};
+export { articleTypes };
 
 export const getArticle = (type) => {
+  const metadata = articles[type];
+  if (!metadata) return null;
+
+  let component;
   switch (type) {
     case 'spread-metrics':
-      return { ...SpreadMetricsArticle, type };
+      component = SpreadMetricsArticle;
+      break;
     case 'essential-functions':
-      return { ...EssentialFunctionsArticle, type };
+      component = EssentialFunctionsArticle;
+      break;
     case 'greeks':
-      return { ...GreeksArticle, type };
+      component = GreeksArticle;
+      break;
     case 'volatility-crush':
-      return { ...VolatilityCrushArticle, type };
+      component = VolatilityCrushArticle;
+      break;
     default:
       return null;
   }
+
+  return { ...metadata, ...component };
 }; 

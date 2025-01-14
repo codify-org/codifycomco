@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { getArticle, articleTypes } from '../src/data/articles.js';
+import { getArticle, articleTypes } from '../src/data/articleMetadata.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,12 +11,7 @@ const BASE_URL = 'https://codify.com.co';
 
 function generateSitemap() {
   // Get all articles
-  const articles = [
-    getArticle(articleTypes.spreadMetrics),
-    getArticle(articleTypes.essentialFunctions),
-    getArticle(articleTypes.greeks),
-    getArticle(articleTypes.volatilityCrush)
-  ].filter(Boolean);
+  const articles = Object.values(articleTypes).map(type => getArticle(type)).filter(Boolean);
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -55,7 +50,7 @@ function generateSitemap() {
   ${articles.map(article => `
   <url>
     <loc>${BASE_URL}/article/${encodeURIComponent(article.title.toLowerCase().replace(/\s+/g, '-'))}</loc>
-    <lastmod>${article.lastModified || new Date().toISOString().split('T')[0]}</lastmod>
+    <lastmod>${article.lastModified}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>`).join('\n')}
