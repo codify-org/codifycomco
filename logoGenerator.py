@@ -402,6 +402,70 @@ def save_logo_transparent_padded(size, filename, padding_percent=20):
     # Clean up temporary file
     os.remove("temp.eps")
 
+def save_logo_transparent_fitted(size, filename):
+    """
+    Save the logo as a PNG file with transparent background, fitted to maintain aspect ratio.
+    The logo will be sized according to the height (minus 20% padding for top/bottom),
+    and the remaining width will be used as padding on the sides.
+    
+    Args:
+        size (tuple): Target size (width, height)
+        filename (str): Output filename
+    """
+    width, height = size
+    
+    # Calculate the logo size based on height with 10% padding top and bottom
+    vertical_padding = height * 0.2  # 10% top and 10% bottom
+    logo_size = int(height - vertical_padding)
+    
+    # Create a PostScript file from turtle graphics
+    canvas = screen.getcanvas()
+    canvas.postscript(file="temp.eps", width=canvas_size, height=canvas_size, colormode='color')
+    
+    # Convert EPS to PNG using PIL
+    img = Image.open("temp.eps")
+    img = img.convert('RGBA')
+    
+    # Create a white background first (since our logo is drawn on black)
+    bg = Image.new('RGBA', img.size, (255, 255, 255, 255))
+    img = Image.alpha_composite(bg, img)
+    
+    # Make the background transparent
+    data = img.getdata()
+    new_data = []
+    for item in data:
+        # If pixel is white or very close to white, make it transparent
+        if item[0] > 240 and item[1] > 240 and item[2] > 240:
+            new_data.append((0, 0, 0, 0))
+        else:
+            # Keep the color but ensure full opacity
+            new_data.append((*item[:3], 255))
+    
+    img.putdata(new_data)
+    
+    # Resize the logo to the calculated square size
+    img = img.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+    
+    # Create the final image with the requested dimensions
+    final_img = Image.new('RGBA', size, (0, 0, 0, 0))
+    
+    # Calculate position to paste the logo (center horizontally, 10% padding from top)
+    paste_x = (width - logo_size) // 2
+    paste_y = int(height * 0.1)  # 10% padding from top
+    
+    # Paste the logo onto the transparent background
+    final_img.paste(img, (paste_x, paste_y), img)
+    
+    #add black background
+    final_img = Image.new('RGBA', size, (0, 0, 0, 255))
+    final_img.paste(img, (paste_x, paste_y), img)
+
+    # Save the image with transparency
+    final_img.save(filename, "PNG")
+    
+    # Clean up temporary file
+    os.remove("temp.eps")
+
 # Save regular versions
 save_logo((32, 32), "public/favicon.png")      # Standard favicon
 save_logo((16, 16), "public/favicon-16.png")   # Small favicon
@@ -414,6 +478,10 @@ save_logo((128, 128), "public/logo-128.png")   # Small size
 # Save transparent versions
 save_logo_transparent((128, 128), "public/logo-transparent.png")  # For footer and about section
 save_logo_transparent_padded((1000, 1000), "public/logo-1k-transparent-20p.png", padding_percent=20)  # 1K version with 20% padding
+
+# Save 320x132 version with proper fitting
+save_logo_transparent_fitted((320, 132), "public/google-logo-320x132.png")
+save_logo_transparent_fitted((1128, 191), "public/linkedin-logo-320x132.png")
 
 # Close the turtle window
 screen.bye()

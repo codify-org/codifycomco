@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import ArticleModal from './articles/ArticleModal';
-import SpreadMetricsArticle from './articles/bid-ask/SpreadMetricsArticle';
-import EssentialFunctionsArticle from './articles/essential-functions/EssentialFunctionsArticle';
+import ArticleModal from './ArticleModal';
+import { useArticles, articleTypes } from './articles/ArticlesContext';
 
 const ArticleCard = ({ article, onClick }) => (
   <button 
@@ -23,25 +22,16 @@ const ArticleCard = ({ article, onClick }) => (
 
 const ArticlesSection = () => {
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const { getArticleContent } = useArticles();
 
   const bidAskArticles = [
-    EssentialFunctionsArticle,
-    SpreadMetricsArticle
+    getArticleContent(articleTypes.essentialFunctions),
+    getArticleContent(articleTypes.spreadMetrics)
   ];
 
   const greekArticles = [
-    {
-      title: "Essential Options Greeks Explained",
-      description: "A comprehensive guide to Delta, Gamma, Theta, Vega, and Rho - understanding your position's risk exposure.",
-      readTime: 7,
-      content: "Coming soon..."
-    },
-    {
-      title: "Dynamic Greek Hedging Strategies",
-      description: "Learn how to actively manage your portfolio's Greek exposures and implement effective hedging techniques.",
-      readTime: 10,
-      content: "Coming soon..."
-    }
+    getArticleContent(articleTypes.greeks),
+    getArticleContent(articleTypes.volatilityCrush)
   ];
 
   return (

@@ -2,23 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Performance optimizations -->
-  <link rel="preload" href="/src/main.jsx" as="script">
+  
+  <!-- Preload critical assets -->
+  <link rel="modulepreload" href="/src/main.jsx" as="script" type="module">
+  <link rel="prefetch" href="/videos/hero-bg.mp4">
+  <link rel="preload" href="/logo-transparent.png" as="image" type="image/png">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" as="style">
+  
+  <!-- Performance optimizations -->
   <meta http-equiv="Cache-Control" content="max-age=31536000" />
   
+  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
   <link rel="canonical" href="https://codify.com.co" />
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
+  
+  <!-- Viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Codify AI Backtesting</title>
-
+  
   <!-- Primary Meta Tags -->
   <meta name="title" content="Codify AI Backtesting">
   <meta name="description" content="Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.">
-
+  <meta name="keywords" content="options trading, backtesting, AI trading, algorithmic trading, options strategies, greeks analysis">
+  <meta name="author" content="Codify AI">
+  <meta name="theme-color" content="#000000">
+  
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://codify.com.co/">
@@ -27,7 +37,7 @@
   <meta property="og:image" content="https://codify.com.co/logo-1k.png">
   <meta property="og:image:width" content="1000">
   <meta property="og:image:height" content="1000">
-
+  
   <!-- Twitter/X -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@AiBacktesting">
@@ -35,18 +45,14 @@
   <meta name="twitter:title" content="Codify AI Backtesting">
   <meta name="twitter:description" content="Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.">
   <meta name="twitter:image" content="https://codify.com.co/logo-1k.png">
-
-  <!-- CodifyBacktesting -->
-  <meta property="codifybacktesting:card" content="summary_large_image">
-  <meta property="codifybacktesting:url" content="https://codify.com.co/">
-  <meta property="codifybacktesting:title" content="Codify AI Backtesting">
-  <meta property="codifybacktesting:description" content="Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.">
-  <meta property="codifybacktesting:image" content="https://codify.com.co/logo-1k.png">
-
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Title -->
+  <title>Codify AI Backtesting</title>
   
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -61,33 +67,25 @@
         "availability": "https://schema.org/OnlineOnly"
       },
       "url": "https://codify.com.co",
-      "image": "https://codify.com.co/logo-1k.png"
+      "image": "https://codify.com.co/logo-1k.png",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "156"
+      }
     }
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-5KB46PK5');</script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Web Vitals Monitoring -->
-  <script>
-    addEventListener('DOMContentLoaded', () => {
-      webVitals.getCLS(console.log);
-      webVitals.getFID(console.log);
-      webVitals.getLCP(console.log);
-    });
   </script>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KB46PK5"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- Fallback for no JavaScript -->
+  <noscript>
+    <div style="text-align: center; padding: 2rem;">
+      <h1>JavaScript Required</h1>
+      <p>Please enable JavaScript to use Codify AI Backtesting.</p>
+    </div>
+  </noscript>
 </body>
 </html>

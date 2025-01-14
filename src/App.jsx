@@ -1,44 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import HeroSection from './components/HeroSection';
 import FeaturesSection from './components/FeaturesSection';
-import AboutSection from './components/AboutSection';
 import ArticlesSection from './components/ArticlesSection';
+import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
-import './App.css';
+import { PolicyModalProvider } from './components/policies/PolicyModal';
+import { ArticlesProvider } from './components/articles/ArticlesContext';
 
-const PreviewBanner = () => (
-  <div className="fixed top-0 right-0 m-4 px-3 py-1 bg-yellow-500 text-black text-sm font-medium rounded-full shadow-lg z-50 flex items-center space-x-1">
-    <span className="w-2 h-2 bg-black rounded-full animate-pulse"></span>
-    <span>Preview Environment</span>
-  </div>
-);
-
-const App = () => {
-  const [isPreview, setIsPreview] = useState(false);
-
-  useEffect(() => {
-    const hostname = window.location.hostname;
-    console.log('Current hostname:', hostname);
-    const isPreviewHost = hostname === 'vercel.codify.com.co' || 
-                         hostname === 'localhost' ||
-                         hostname.includes('vercel.app') ||
-                         hostname.startsWith('preview');
-    console.log('Is preview?', isPreviewHost);
-    setIsPreview(isPreviewHost);
-  }, []);
-
+function App() {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-black via-purple-900 to-black">
-      {isPreview && <PreviewBanner />}
-      <HeroSection />
-      <FeaturesSection />
-      <ArticlesSection />
-      <AboutSection />
-      <ContactSection />
-      <Footer />
-    </div>
+    <PolicyModalProvider>
+      <ArticlesProvider>
+        <div className="min-h-screen bg-black text-white">
+          <HeroSection />
+          <FeaturesSection />
+          <ArticlesSection />
+          <AboutSection />
+          <ContactSection />
+          <Footer />
+        </div>
+      </ArticlesProvider>
+    </PolicyModalProvider>
   );
-};
+}
 
 export default App;

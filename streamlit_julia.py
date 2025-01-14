@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 import math
 import multiprocessing as mp
+import plotly.graph_objects as go
 
 # --- Session State Initialization ---
 
@@ -51,9 +52,9 @@ def generate_julia(width, height, max_iter, xmin, xmax, ymin, ymax, c):
     return img
 
 def main():
-    st.title("Interactive Julia Set Fractal Generator (Auto-Generate)")
+    st.title("Interactive Julia Set Fractal Generator")
 
-    # --- Sidebar Parameters ---
+    # --- Sidebar Inputs ---
     st.sidebar.header("Fractal Parameters")
     width = st.sidebar.slider("Image Width", 200, 1200, 800, step=50)
     height = st.sidebar.slider("Image Height", 200, 1200, 600, step=50)
@@ -68,16 +69,18 @@ def main():
     real_c = st.sidebar.slider("Real(c)", -2.0, 2.0, float(st.session_state.real_c), step=0.01)
     imag_c = st.sidebar.slider("Imag(c)", -2.0, 2.0, float(st.session_state.imag_c), step=0.01)
 
-    # Update session state
+    # Update session state from sliders
     st.session_state.real_c = real_c
     st.session_state.imag_c = imag_c
+
     st.sidebar.write(f"Current c = {real_c:.4f} + {imag_c:.4f}j")
 
-    # --- Automatically generate and display the fractal ---
-    st.write("Regenerating the Julia set fractal automatically whenever a parameter changes...")
-    c = complex(st.session_state.real_c, st.session_state.imag_c)
-    img = generate_julia(width, height, max_iter, xmin, xmax, ymin, ymax, c)
-    st.image(img, caption="Julia Set Fractal", use_column_width=True)
+    # --- Generate Image Button ---
+    if st.sidebar.button("Generate Fractal"):
+        st.write("Generating Julia set fractal. This might take a moment...")
+        c = complex(st.session_state.real_c, st.session_state.imag_c)
+        img = generate_julia(width, height, max_iter, xmin, xmax, ymin, ymax, c)
+        st.image(img, caption="Julia Set Fractal", use_column_width=True)
 
 if __name__ == "__main__":
     main()
