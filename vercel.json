@@ -1,9 +1,15 @@
 {
   "version": 2,
-  "routes": [
+  "builds": [
     {
-      "handle": "filesystem"
-    },
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
     {
       "src": "/assets/(.*)",
       "headers": {
@@ -12,31 +18,11 @@
       "continue": true
     },
     {
-      "src": "/(.*)\\.js",
-      "headers": {
-        "content-type": "application/javascript"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*)\\.jsx",
-      "headers": {
-        "content-type": "application/javascript"
-      },
-      "continue": true
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
       "dest": "/index.html"
-    }
-  ],
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
     }
   ]
 } 

@@ -22,10 +22,17 @@ export const getArticle = (type) => {
 };
 
 export const ArticlesProvider = ({ children }) => {
+  const articles = [
+    getArticle('spread-metrics'),
+    getArticle('essential-functions'),
+    getArticle('greeks'),
+    getArticle('volatility-crush')
+  ];
+
   const getArticleContent = (type) => getArticle(type);
 
   return (
-    <ArticlesContext.Provider value={{ getArticleContent }}>
+    <ArticlesContext.Provider value={{ articles, getArticleContent }}>
       {children}
     </ArticlesContext.Provider>
   );
