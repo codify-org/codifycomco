@@ -128,6 +128,12 @@ const FeatureCard = ({ icon: Icon, title, description, featureKey }) => {
           <p className="text-purple-100/80 leading-relaxed">
             {description}
           </p>
+          <div className="mt-4 text-sm text-purple-300 flex items-center opacity-80 group-hover:opacity-100 transition-opacity">
+            <span>Click to learn more</span>
+            <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
         </div>
       </div>
       <FeatureModal 

@@ -152,9 +152,15 @@ const AboutSection = () => {
               </div>
               <h3 className="text-2xl font-semibold text-purple-200 ml-4">Our Mission</h3>
             </div>
-            <p className="text-purple-100/80 leading-relaxed">
-              To empower options traders with tools that transform complexity into clarity. We're committed to providing you with institutional-grade analytics that consider every aspect of your trades - from granular bid-ask dynamics to sophisticated Greek decomposition.
+            <p className="text-purple-100/80 leading-relaxed mb-4">
+              {missionVisionDetails.mission.description}
             </p>
+            <div className="text-sm text-purple-300 flex items-center opacity-80 group-hover:opacity-100 transition-opacity">
+              <span>Click to explore our mission</span>
+              <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </div>
 
           {/* Vision */}
@@ -168,9 +174,15 @@ const AboutSection = () => {
               </div>
               <h3 className="text-2xl font-semibold text-purple-200 ml-4">Our Vision</h3>
             </div>
-            <p className="text-purple-100/80 leading-relaxed">
-              We envision a trading world where uncertainty is replaced with understanding, where risk is managed with precision, and where every trader has access to the insights they need to thrive. Through advanced AI and deep market analysis, we're building that future.
+            <p className="text-purple-100/80 leading-relaxed mb-4">
+              {missionVisionDetails.vision.description}
             </p>
+            <div className="text-sm text-purple-300 flex items-center opacity-80 group-hover:opacity-100 transition-opacity">
+              <span>Click to explore our vision</span>
+              <svg className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
