@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useArticles } from '../../components/articles/ArticlesContext';
-import BidAskGraph from '../../components/articles/bid-ask/BidAskGraph';
-import LiquidityGraph from '../../components/articles/bid-ask/LiquidityGraph';
-import VolatilityGraph from '../../components/articles/bid-ask/VolatilityGraph';
-import SpreadMetricsGraph from '../../components/articles/bid-ask/SpreadMetricsGraph';
-import OrderBookGraph from '../../components/articles/bid-ask/OrderBookGraph';
-import EssentialBidAskGraph from '../../components/articles/essential-functions/BidAskGraph';
-import EssentialLiquidityGraph from '../../components/articles/essential-functions/LiquidityGraph';
-import EssentialVolatilityGraph from '../../components/articles/essential-functions/VolatilityGraph';
-import DeltaGraph from '../../components/articles/greeks/DeltaGraph';
-import GammaGraph from '../../components/articles/greeks/GammaGraph';
-import ThetaGraph from '../../components/articles/greeks/ThetaGraph';
-import VegaGraph from '../../components/articles/greeks/VegaGraph';
-import RhoGraph from '../../components/articles/greeks/RhoGraph';
+import {
+  BidAskGraph,
+  LiquidityGraph,
+  VolatilityGraph,
+  SpreadMetricsGraph,
+  OrderBookGraph
+} from '../../components/articles/bid-ask';
+import {
+  BidAskGraph as EssentialBidAskGraph,
+  LiquidityGraph as EssentialLiquidityGraph,
+  VolatilityGraph as EssentialVolatilityGraph
+} from '../../components/articles/essential-functions';
+import {
+  DeltaGraph,
+  GammaGraph,
+  ThetaGraph,
+  VegaGraph,
+  RhoGraph
+} from '../../components/articles/greeks';
 
 const ArticlePage = () => {
   const { slug } = useParams();
@@ -40,20 +46,18 @@ const ArticlePage = () => {
       document.title = `${foundArticle.title} | Codify AI Backtesting`;
       document.querySelector('meta[name="description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
       
-      // Update Open Graph meta tags
+      // Update Open Graph meta tags (LinkedIn uses these)
       document.querySelector('meta[property="og:title"]')?.setAttribute('content', foundArticle.title);
       document.querySelector('meta[property="og:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '');
       document.querySelector('meta[property="og:url"]')?.setAttribute('content', window.location.href);
       document.querySelector('meta[property="og:type"]')?.setAttribute('content', 'article');
       document.querySelector('meta[property="og:site_name"]')?.setAttribute('content', 'Codify AI Backtesting');
+      document.querySelector('meta[property="og:image"]')?.setAttribute('content', 'https://codify.com.co/logo-1k.png') ||
+        createMetaTag('property', 'og:image', 'https://codify.com.co/logo-1k.png');
       
-      // Update LinkedIn specific meta tags
-      document.querySelector('meta[property="linkedin:title"]')?.setAttribute('content', foundArticle.title) ||
-        createMetaTag('property', 'linkedin:title', foundArticle.title);
-      document.querySelector('meta[property="linkedin:description"]')?.setAttribute('content', foundArticle.content?.substring(0, 160) || '') ||
-        createMetaTag('property', 'linkedin:description', foundArticle.content?.substring(0, 160) || '');
-      document.querySelector('meta[property="linkedin:image"]')?.setAttribute('content', 'https://codify.com.co/logo-1k.png') ||
-        createMetaTag('property', 'linkedin:image', 'https://codify.com.co/logo-1k.png');
+      // Remove old LinkedIn specific meta tags as they're not needed
+      const linkedinTags = document.querySelectorAll('meta[property^="linkedin:"]');
+      linkedinTags.forEach(tag => tag.remove());
       
       // Update Twitter meta tags
       document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', foundArticle.title);
