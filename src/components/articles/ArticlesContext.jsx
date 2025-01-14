@@ -3,22 +3,33 @@ import SpreadMetricsArticle from './bid-ask/SpreadMetricsArticle';
 import EssentialFunctionsArticle from './essential-functions/EssentialFunctionsArticle';
 import GreeksArticle from './greeks/GreeksArticle';
 import VolatilityCrushArticle from './greeksonearnings/VolatilityCrushArticle';
+import { articles as articlesMetadata } from '../../data/articleMetadata';
 
 const ArticlesContext = createContext();
 
 export const getArticle = (type) => {
+  const metadata = articlesMetadata[type];
+  if (!metadata) return null;
+
+  let component;
   switch (type) {
     case 'spread-metrics':
-      return { ...SpreadMetricsArticle, type };
+      component = SpreadMetricsArticle;
+      break;
     case 'essential-functions':
-      return { ...EssentialFunctionsArticle, type };
+      component = EssentialFunctionsArticle;
+      break;
     case 'greeks':
-      return { ...GreeksArticle, type };
+      component = GreeksArticle;
+      break;
     case 'volatility-crush':
-      return { ...VolatilityCrushArticle, type };
+      component = VolatilityCrushArticle;
+      break;
     default:
       return null;
   }
+
+  return { ...metadata, ...component };
 };
 
 export const ArticlesProvider = ({ children }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BidAskGraph from './articles/bid-ask/BidAskGraph';
 import LiquidityGraph from './articles/bid-ask/LiquidityGraph';
 import VolatilityGraph from './articles/bid-ask/VolatilityGraph';
@@ -14,6 +14,7 @@ import VegaGraph from './articles/greeks/VegaGraph';
 import RhoGraph from './articles/greeks/RhoGraph';
 
 const ArticleModal = ({ article, onClose }) => {
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const shareUrl = `${window.location.origin}/article/${article.slug}`;
   
   const handleShare = (platform) => {
@@ -45,23 +46,24 @@ const ArticleModal = ({ article, onClose }) => {
       title: article.title,
       description: article.description,
       readTime: article.readTime,
-      contentLength: article.content?.length
+      contentLength: article.content?.length,
+      slug: article.slug
     });
     if (article) {
       // Update meta tags when article is opened
       document.title = `${article.title} | Codify AI Backtesting`;
-      document.querySelector('meta[name="description"]').setAttribute('content', article.content.substring(0, 160));
-      document.querySelector('meta[property="og:title"]').setAttribute('content', article.title);
-      document.querySelector('meta[property="og:description"]').setAttribute('content', article.content.substring(0, 160));
-      document.querySelector('meta[name="twitter:title"]').setAttribute('content', article.title);
-      document.querySelector('meta[name="twitter:description"]').setAttribute('content', article.content.substring(0, 160));
+      document.querySelector('meta[name="description"]')?.setAttribute('content', article.content?.substring(0, 160) || '');
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', article.title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', article.content?.substring(0, 160) || '');
+      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', article.title);
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', article.content?.substring(0, 160) || '');
 
       // Enhanced article structured data with FAQ
       const articleSchema = {
         '@context': 'https://schema.org',
         '@type': 'Article',
         'headline': article.title,
-        'description': article.content.substring(0, 160),
+        'description': article.content?.substring(0, 160) || '',
         'author': {
           '@type': 'Organization',
           'name': 'Codify AI Backtesting'
@@ -76,7 +78,7 @@ const ArticleModal = ({ article, onClose }) => {
         },
         'mainEntityOfPage': {
           '@type': 'WebPage',
-          '@id': `https://codify.com.co/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`
+          '@id': shareUrl
         },
         'datePublished': article.publishDate || new Date().toISOString(),
         'dateModified': article.lastModified || new Date().toISOString(),
@@ -108,18 +110,18 @@ const ArticleModal = ({ article, onClose }) => {
       if (article) {
         // Restore original meta tags
         document.title = 'Codify AI Backtesting';
-        document.querySelector('meta[name="description"]').setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
-        document.querySelector('meta[property="og:title"]').setAttribute('content', 'Codify AI Backtesting');
-        document.querySelector('meta[property="og:description"]').setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
-        document.querySelector('meta[name="twitter:title"]').setAttribute('content', 'Codify AI Backtesting');
-        document.querySelector('meta[name="twitter:description"]').setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
+        document.querySelector('meta[name="description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
+        document.querySelector('meta[property="og:title"]')?.setAttribute('content', 'Codify AI Backtesting');
+        document.querySelector('meta[property="og:description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
+        document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', 'Codify AI Backtesting');
+        document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', 'Backtest options strategies with tick-level precision. Advanced AI-powered analysis considering liquidity risk and greeks exposures for optimal trading strategies.');
         
         // Remove article schema
         const scriptTag = document.querySelector('#article-schema');
         if (scriptTag) scriptTag.remove();
       }
     };
-  }, [article]);
+  }, [article, shareUrl]);
 
   if (!article) return null;
 
