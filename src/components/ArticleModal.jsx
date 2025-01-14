@@ -14,7 +14,7 @@ import VegaGraph from './articles/greeks/VegaGraph';
 import RhoGraph from './articles/greeks/RhoGraph';
 
 const ArticleModal = ({ article, onClose }) => {
-  const shareUrl = `https://codify.com.co/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`;
+  const shareUrl = `${window.location.origin}/article/${article.title.toLowerCase().replace(/\s+/g, '-')}`;
   
   const handleShare = async (platform) => {
     const title = `${article.title} | Codify AI Backtesting`;
@@ -25,7 +25,16 @@ const ArticleModal = ({ article, onClose }) => {
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
         break;
       case 'linkedin':
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`, '_blank');
+        const linkedinUrl = new URL('https://www.linkedin.com/sharing/share-offsite/');
+        linkedinUrl.searchParams.append('url', shareUrl);
+        linkedinUrl.searchParams.append('title', title);
+        linkedinUrl.searchParams.append('summary', text);
+        linkedinUrl.searchParams.append('source', 'Codify AI Backtesting');
+        window.open(
+          linkedinUrl.toString(),
+          'LinkedInShare',
+          'width=600,height=600,toolbar=0,location=0,menubar=0'
+        );
         break;
       case 'copy':
         try {
@@ -425,15 +434,27 @@ const ArticleModal = ({ article, onClose }) => {
                 Share this article:
               </div>
               <nav className="flex space-x-4" aria-label="Share article">
-                {['Twitter', 'LinkedIn', 'Email'].map((platform) => (
-                  <button
-                    key={platform}
-                    className="text-sm text-purple-300 hover:text-white transition-colors"
-                    aria-label={`Share on ${platform}`}
-                  >
-                    {platform}
-                  </button>
-                ))}
+                <button
+                  onClick={() => handleShare('twitter')}
+                  className="text-sm text-purple-300 hover:text-white transition-colors"
+                  aria-label="Share on Twitter"
+                >
+                  Twitter
+                </button>
+                <button
+                  onClick={() => handleShare('linkedin')}
+                  className="text-sm text-purple-300 hover:text-white transition-colors"
+                  aria-label="Share on LinkedIn"
+                >
+                  LinkedIn
+                </button>
+                <button
+                  onClick={() => handleShare('copy')}
+                  className="text-sm text-purple-300 hover:text-white transition-colors"
+                  aria-label="Copy link"
+                >
+                  Copy Link
+                </button>
               </nav>
             </div>
           </footer>
