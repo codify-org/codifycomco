@@ -119,18 +119,15 @@ const HeroSection = () => {
             <p className={`relative max-w-2xl mx-auto text-xl text-purple-50 leading-relaxed transition-all duration-1000 delay-500 ease-out transform ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
-              {/* Blurred backdrop with softer border and shadow */}
               <span className="absolute inset-0 bg-white/5 backdrop-blur-md rounded-2xl -z-10 
                 border border-white/5 shadow-[0_0_200px_rgba(255,255,255,0.07)]"></span>
-              {/* Adding padding and making the container relative */}
               <span className="relative block p-10">
-                Find optimal setups to trigger daily stock option trades
-                <span className="font-semibold text-pink-200"> with to the second bid-ask granularity</span>.
-                Leverage
-                <span className="font-semibold text-purple-200"> Deeper precision </span>
-                to enter and exit Multi-leg Options Strategies on
-              <span className="font-semibold text-pink-300">  economic and corporates </span>events 
-
+                Discover and optimize your options trading strategies with 
+                <span className="font-semibold text-pink-200"> millisecond-precise bid-ask data</span>.
+                Our platform provides
+                <span className="font-semibold text-purple-200"> institutional-grade backtesting </span>
+                for multi-leg options strategies, with advanced analysis of
+                <span className="font-semibold text-pink-300"> market events and Greek exposures</span>
               </span>
             </p>
           </div>
@@ -225,7 +222,7 @@ const HeroSection = () => {
       >
         <div className="space-y-6">
           <div className="bg-purple-900/20 rounded-lg p-6 border border-purple-900/50">
-            <h4 className="text-xl font-semibold text-purple-200 mb-2">Sample Strategy: Earnings Volatility Crush</h4>
+            <h4 className="text-xl font-semibold text-purple-200 mb-2">Sample Strategy: Event-Driven Volatility Trading</h4>
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-purple-100">Win Rate</span>
@@ -246,7 +243,7 @@ const HeroSection = () => {
             </div>
           </div>
           <p className="text-purple-100">
-            These results are based on historical data from Jan 2021 to Dec 2024, using our backtesting engine.
+            Results based on historical data from 2020-2024, using real market conditions including bid-ask spreads and Greek exposures.
           </p>
           <button
             onClick={() => {
